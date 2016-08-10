@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DalangSampahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Jabatan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jabatan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deskripsi" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JabatanID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="NamaDepan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NamaBelakang" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dob" Type="date" Nullable="false" />
+          <Property Name="TglGabung" Type="date" Nullable="false" />
+          <Property Name="Alamat" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KatName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deskripsi" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nasabah">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="TipeID" Type="int" Nullable="false" />
+          <Property Name="NamaDepan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NamaBelakang" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dob" Type="date" />
+          <Property Name="NoIdentitas" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" />
+          <Property Name="TglGabung" Type="date" Nullable="false" />
+          <Property Name="Alamat" Type="text" />
+          <Property Name="Balance" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubKategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KatID" Type="int" Nullable="false" />
+          <Property Name="SubKatNAme" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deskripsi" Type="text" Nullable="false" />
+          <Property Name="Harga" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipeIdentitas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipeIdentitas" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="NasabahID" Type="int" Nullable="false" />
+          <Property Name="KaryawanID" Type="int" Nullable="false" />
+          <Property Name="TglTrx" Type="datetime" Nullable="false" />
+          <Property Name="LastBalance" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrxDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrxID" Type="int" Nullable="false" />
+          <Property Name="SubKatID" Type="int" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Harga" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Ammount" Type="decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="TrxType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrxType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deskripsi" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Karyawan_Jabatan">
+          <End Role="Jabatan" Type="Self.Jabatan" Multiplicity="1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jabatan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="JabatanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nasabah_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nasabah">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nasabah_TipeIdentitas">
+          <End Role="TipeIdentitas" Type="Self.TipeIdentitas" Multiplicity="1" />
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipeIdentitas">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nasabah">
+              <PropertyRef Name="TipeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubKategori_SubKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="SubKategori" Type="Self.SubKategori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubKategori">
+              <PropertyRef Name="KatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_Karyawan">
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="KaryawanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="NasabahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_TrxType">
+          <End Role="TrxType" Type="Self.TrxType" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrxType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrxDetail_SubKategori">
+          <End Role="SubKategori" Type="Self.SubKategori" Multiplicity="0..1" />
+          <End Role="TrxDetail" Type="Self.TrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubKategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TrxDetail">
+              <PropertyRef Name="SubKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrxDetail_TrxDetail">
+          <End Role="Trx" Type="Self.Trx" Multiplicity="1" />
+          <End Role="TrxDetail" Type="Self.TrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trx">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TrxDetail">
+              <PropertyRef Name="TrxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DalangSampahModelStoreContainer">
+          <EntitySet Name="Jabatan" EntityType="Self.Jabatan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Karyawan" EntityType="Self.Karyawan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nasabah" EntityType="Self.Nasabah" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubKategori" EntityType="Self.SubKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipeIdentitas" EntityType="Self.TipeIdentitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trx" EntityType="Self.Trx" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrxDetail" EntityType="Self.TrxDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrxType" EntityType="Self.TrxType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Karyawan_Jabatan" Association="Self.FK_Karyawan_Jabatan">
+            <End Role="Jabatan" EntitySet="Jabatan" />
+            <End Role="Karyawan" EntitySet="Karyawan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Status" Association="Self.FK_Karyawan_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Karyawan" EntitySet="Karyawan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nasabah_Status" Association="Self.FK_Nasabah_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Nasabah" EntitySet="Nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nasabah_TipeIdentitas" Association="Self.FK_Nasabah_TipeIdentitas">
+            <End Role="TipeIdentitas" EntitySet="TipeIdentitas" />
+            <End Role="Nasabah" EntitySet="Nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubKategori_SubKategori" Association="Self.FK_SubKategori_SubKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="SubKategori" EntitySet="SubKategori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_Karyawan" Association="Self.FK_Trx_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawan" />
+            <End Role="Trx" EntitySet="Trx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_Nasabah" Association="Self.FK_Trx_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Trx" EntitySet="Trx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_TrxType" Association="Self.FK_Trx_TrxType">
+            <End Role="TrxType" EntitySet="TrxType" />
+            <End Role="Trx" EntitySet="Trx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrxDetail_SubKategori" Association="Self.FK_TrxDetail_SubKategori">
+            <End Role="SubKategori" EntitySet="SubKategori" />
+            <End Role="TrxDetail" EntitySet="TrxDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrxDetail_TrxDetail" Association="Self.FK_TrxDetail_TrxDetail">
+            <End Role="Trx" EntitySet="Trx" />
+            <End Role="TrxDetail" EntitySet="TrxDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DalangSampahModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Jabatan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jabatan1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Karyawans" Relationship="Self.FK_Karyawan_Jabatan" FromRole="Jabatan" ToRole="Karyawan" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JabatanID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="NamaDepan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamaBelakang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TglGabung" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Alamat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Jabatan" Relationship="Self.FK_Karyawan_Jabatan" FromRole="Karyawan" ToRole="Jabatan" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Karyawan_Status" FromRole="Karyawan" ToRole="Status" />
+          <NavigationProperty Name="Trxes" Relationship="Self.FK_Trx_Karyawan" FromRole="Karyawan" ToRole="Trx" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SubKategoris" Relationship="Self.FK_SubKategori_SubKategori" FromRole="Kategori" ToRole="SubKategori" />
+        </EntityType>
+        <EntityType Name="Nasabah">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="TipeID" Type="Int32" Nullable="false" />
+          <Property Name="NamaDepan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamaBelakang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dob" Type="DateTime" Precision="0" />
+          <Property Name="NoIdentitas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="TglGabung" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Alamat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Nasabah_Status" FromRole="Nasabah" ToRole="Status" />
+          <NavigationProperty Name="TipeIdentita" Relationship="Self.FK_Nasabah_TipeIdentitas" FromRole="Nasabah" ToRole="TipeIdentitas" />
+          <NavigationProperty Name="Trxes" Relationship="Self.FK_Trx_Nasabah" FromRole="Nasabah" ToRole="Trx" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Karyawans" Relationship="Self.FK_Karyawan_Status" FromRole="Status" ToRole="Karyawan" />
+          <NavigationProperty Name="Nasabahs" Relationship="Self.FK_Nasabah_Status" FromRole="Status" ToRole="Nasabah" />
+        </EntityType>
+        <EntityType Name="SubKategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KatID" Type="Int32" Nullable="false" />
+          <Property Name="SubKatNAme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Harga" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_SubKategori_SubKategori" FromRole="SubKategori" ToRole="Kategori" />
+          <NavigationProperty Name="TrxDetails" Relationship="Self.FK_TrxDetail_SubKategori" FromRole="SubKategori" ToRole="TrxDetail" />
+        </EntityType>
+        <EntityType Name="TipeIdentita">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipeIdentitas" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Nasabahs" Relationship="Self.FK_Nasabah_TipeIdentitas" FromRole="TipeIdentitas" ToRole="Nasabah" />
+        </EntityType>
+        <EntityType Name="Trx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="NasabahID" Type="Int32" Nullable="false" />
+          <Property Name="KaryawanID" Type="Int32" Nullable="false" />
+          <Property Name="TglTrx" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastBalance" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Karyawan" Relationship="Self.FK_Trx_Karyawan" FromRole="Trx" ToRole="Karyawan" />
+          <NavigationProperty Name="Nasabah" Relationship="Self.FK_Trx_Nasabah" FromRole="Trx" ToRole="Nasabah" />
+          <NavigationProperty Name="TrxType" Relationship="Self.FK_Trx_TrxType" FromRole="Trx" ToRole="TrxType" />
+          <NavigationProperty Name="TrxDetails" Relationship="Self.FK_TrxDetail_TrxDetail" FromRole="Trx" ToRole="TrxDetail" />
+        </EntityType>
+        <EntityType Name="TrxDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrxID" Type="Int32" Nullable="false" />
+          <Property Name="SubKatID" Type="Int32" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Harga" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Ammount" Type="Decimal" Precision="10" Scale="0" />
+          <NavigationProperty Name="SubKategori" Relationship="Self.FK_TrxDetail_SubKategori" FromRole="TrxDetail" ToRole="SubKategori" />
+          <NavigationProperty Name="Trx" Relationship="Self.FK_TrxDetail_TrxDetail" FromRole="TrxDetail" ToRole="Trx" />
+        </EntityType>
+        <EntityType Name="TrxType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrxType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Trxes" Relationship="Self.FK_Trx_TrxType" FromRole="TrxType" ToRole="Trx" />
+        </EntityType>
+        <Association Name="FK_Karyawan_Jabatan">
+          <End Role="Jabatan" Type="Self.Jabatan" Multiplicity="1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jabatan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="JabatanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_Karyawan">
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="KaryawanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubKategori_SubKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="SubKategori" Type="Self.SubKategori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubKategori">
+              <PropertyRef Name="KatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nasabah_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nasabah">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nasabah_TipeIdentitas">
+          <End Role="TipeIdentitas" Type="Self.TipeIdentita" Multiplicity="1" />
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipeIdentitas">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nasabah">
+              <PropertyRef Name="TipeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="NasabahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrxDetail_SubKategori">
+          <End Role="SubKategori" Type="Self.SubKategori" Multiplicity="0..1" />
+          <End Role="TrxDetail" Type="Self.TrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubKategori">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TrxDetail">
+              <PropertyRef Name="SubKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trx_TrxType">
+          <End Role="TrxType" Type="Self.TrxType" Multiplicity="1" />
+          <End Role="Trx" Type="Self.Trx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrxType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trx">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrxDetail_TrxDetail">
+          <End Role="Trx" Type="Self.Trx" Multiplicity="1" />
+          <End Role="TrxDetail" Type="Self.TrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trx">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TrxDetail">
+              <PropertyRef Name="TrxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DalangConn" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jabatans" EntityType="Self.Jabatan" />
+          <EntitySet Name="Karyawans" EntityType="Self.Karyawan" />
+          <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="Nasabahs" EntityType="Self.Nasabah" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="SubKategoris" EntityType="Self.SubKategori" />
+          <EntitySet Name="TipeIdentitas" EntityType="Self.TipeIdentita" />
+          <EntitySet Name="Trxes" EntityType="Self.Trx" />
+          <EntitySet Name="TrxDetails" EntityType="Self.TrxDetail" />
+          <EntitySet Name="TrxTypes" EntityType="Self.TrxType" />
+          <AssociationSet Name="FK_Karyawan_Jabatan" Association="Self.FK_Karyawan_Jabatan">
+            <End Role="Jabatan" EntitySet="Jabatans" />
+            <End Role="Karyawan" EntitySet="Karyawans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Status" Association="Self.FK_Karyawan_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Karyawan" EntitySet="Karyawans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_Karyawan" Association="Self.FK_Trx_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawans" />
+            <End Role="Trx" EntitySet="Trxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubKategori_SubKategori" Association="Self.FK_SubKategori_SubKategori">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="SubKategori" EntitySet="SubKategoris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nasabah_Status" Association="Self.FK_Nasabah_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Nasabah" EntitySet="Nasabahs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nasabah_TipeIdentitas" Association="Self.FK_Nasabah_TipeIdentitas">
+            <End Role="TipeIdentitas" EntitySet="TipeIdentitas" />
+            <End Role="Nasabah" EntitySet="Nasabahs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_Nasabah" Association="Self.FK_Trx_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabahs" />
+            <End Role="Trx" EntitySet="Trxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrxDetail_SubKategori" Association="Self.FK_TrxDetail_SubKategori">
+            <End Role="SubKategori" EntitySet="SubKategoris" />
+            <End Role="TrxDetail" EntitySet="TrxDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trx_TrxType" Association="Self.FK_Trx_TrxType">
+            <End Role="TrxType" EntitySet="TrxTypes" />
+            <End Role="Trx" EntitySet="Trxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrxDetail_TrxDetail" Association="Self.FK_TrxDetail_TrxDetail">
+            <End Role="Trx" EntitySet="Trxes" />
+            <End Role="TrxDetail" EntitySet="TrxDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DalangSampahModelStoreContainer" CdmEntityContainer="DalangConn">
+          <EntitySetMapping Name="Jabatans">
+            <EntityTypeMapping TypeName="DalangSampahModel.Jabatan">
+              <MappingFragment StoreEntitySet="Jabatan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Jabatan1" ColumnName="Jabatan" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Karyawans">
+            <EntityTypeMapping TypeName="DalangSampahModel.Karyawan">
+              <MappingFragment StoreEntitySet="Karyawan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JabatanID" ColumnName="JabatanID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="NamaDepan" ColumnName="NamaDepan" />
+                <ScalarProperty Name="NamaBelakang" ColumnName="NamaBelakang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="TglGabung" ColumnName="TglGabung" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="DalangSampahModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KatName" ColumnName="KatName" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nasabahs">
+            <EntityTypeMapping TypeName="DalangSampahModel.Nasabah">
+              <MappingFragment StoreEntitySet="Nasabah">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="TipeID" ColumnName="TipeID" />
+                <ScalarProperty Name="NamaDepan" ColumnName="NamaDepan" />
+                <ScalarProperty Name="NamaBelakang" ColumnName="NamaBelakang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="NoIdentitas" ColumnName="NoIdentitas" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="TglGabung" ColumnName="TglGabung" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="DalangSampahModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubKategoris">
+            <EntityTypeMapping TypeName="DalangSampahModel.SubKategori">
+              <MappingFragment StoreEntitySet="SubKategori">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KatID" ColumnName="KatID" />
+                <ScalarProperty Name="SubKatNAme" ColumnName="SubKatNAme" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipeIdentitas">
+            <EntityTypeMapping TypeName="DalangSampahModel.TipeIdentita">
+              <MappingFragment StoreEntitySet="TipeIdentitas">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TipeIdentitas" ColumnName="TipeIdentitas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trxes">
+            <EntityTypeMapping TypeName="DalangSampahModel.Trx">
+              <MappingFragment StoreEntitySet="Trx">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="NasabahID" ColumnName="NasabahID" />
+                <ScalarProperty Name="KaryawanID" ColumnName="KaryawanID" />
+                <ScalarProperty Name="TglTrx" ColumnName="TglTrx" />
+                <ScalarProperty Name="LastBalance" ColumnName="LastBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrxDetails">
+            <EntityTypeMapping TypeName="DalangSampahModel.TrxDetail">
+              <MappingFragment StoreEntitySet="TrxDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TrxID" ColumnName="TrxID" />
+                <ScalarProperty Name="SubKatID" ColumnName="SubKatID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrxTypes">
+            <EntityTypeMapping TypeName="DalangSampahModel.TrxType">
+              <MappingFragment StoreEntitySet="TrxType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TrxType1" ColumnName="TrxType" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

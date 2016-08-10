@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DalangSampahModelStoreContainer" CdmEntityContainer="DalangConn">
+    <EntitySetMapping Name="Jabatans">
+      <EntityTypeMapping TypeName="DalangSampahModel.Jabatan">
+        <MappingFragment StoreEntitySet="Jabatan">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Jabatan1" ColumnName="Jabatan" />
+          <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Karyawans">
+      <EntityTypeMapping TypeName="DalangSampahModel.Karyawan">
+        <MappingFragment StoreEntitySet="Karyawan">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="JabatanID" ColumnName="JabatanID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="NamaDepan" ColumnName="NamaDepan" />
+          <ScalarProperty Name="NamaBelakang" ColumnName="NamaBelakang" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="TglGabung" ColumnName="TglGabung" />
+          <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategoris">
+      <EntityTypeMapping TypeName="DalangSampahModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KatName" ColumnName="KatName" />
+          <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nasabahs">
+      <EntityTypeMapping TypeName="DalangSampahModel.Nasabah">
+        <MappingFragment StoreEntitySet="Nasabah">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="TipeID" ColumnName="TipeID" />
+          <ScalarProperty Name="NamaDepan" ColumnName="NamaDepan" />
+          <ScalarProperty Name="NamaBelakang" ColumnName="NamaBelakang" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="NoIdentitas" ColumnName="NoIdentitas" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="TglGabung" ColumnName="TglGabung" />
+          <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="DalangSampahModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubKategoris">
+      <EntityTypeMapping TypeName="DalangSampahModel.SubKategori">
+        <MappingFragment StoreEntitySet="SubKategori">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KatID" ColumnName="KatID" />
+          <ScalarProperty Name="SubKatNAme" ColumnName="SubKatNAme" />
+          <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+          <ScalarProperty Name="Harga" ColumnName="Harga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipeIdentitas">
+      <EntityTypeMapping TypeName="DalangSampahModel.TipeIdentita">
+        <MappingFragment StoreEntitySet="TipeIdentitas">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TipeIdentitas" ColumnName="TipeIdentitas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trxes">
+      <EntityTypeMapping TypeName="DalangSampahModel.Trx">
+        <MappingFragment StoreEntitySet="Trx">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="NasabahID" ColumnName="NasabahID" />
+          <ScalarProperty Name="KaryawanID" ColumnName="KaryawanID" />
+          <ScalarProperty Name="TglTrx" ColumnName="TglTrx" />
+          <ScalarProperty Name="LastBalance" ColumnName="LastBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrxDetails">
+      <EntityTypeMapping TypeName="DalangSampahModel.TrxDetail">
+        <MappingFragment StoreEntitySet="TrxDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TrxID" ColumnName="TrxID" />
+          <ScalarProperty Name="SubKatID" ColumnName="SubKatID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Harga" ColumnName="Harga" />
+          <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrxTypes">
+      <EntityTypeMapping TypeName="DalangSampahModel.TrxType">
+        <MappingFragment StoreEntitySet="TrxType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TrxType1" ColumnName="TrxType" />
+          <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
